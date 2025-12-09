@@ -1,48 +1,54 @@
-package ph.com.bpi.hello.M2_Act5;
+package ph.com.bpi.hello.M2_Act6;
+
 
 public class MyApplication {
 
+	/*
+	 
+	**Exercise 2 - Individual**
+
+	1.  Create Interface “Refuelable”. Implementing classes should 
+	be able to implement method “refuel()”.
+	2.  Create Abstract Class “Vehicle”. Extending classes should 
+	have attributes “numberOfWheels” and “brand” 
+	and should have an abstract method “startEngine()”, it should 
+	have a concrete method “void destroy()”.
+	3.  Create two concrete classes “Car” and “Truck”. It must 
+	implement “Refuelable” and extend “Vehicle”.
+	4.  In your Main Application, create one Car and one Truck 
+	and call the methods they inherited / implemented.
+	5.  In your Main Application, create a method called 
+	“destroyVehicle” that takes ONE parameter (either a Car or Truck) 
+	and call their “destroy()” method.
+
+	 
+	 */
 	public static void main(String[] args) {
-		Program excel = new MSExcel("MS Excel");
-		Program word = new MSWord("MS Word");
+		 
+		Car carOne = new Car();
+		carOne.setBrand("Car Toyota");
+		carOne.setNumberOfWheels(4);
 		
-		runProgram(excel);
-		runProgram(word);
+		Truck truckOne=new Truck();
+		truckOne.setBrand("Truck Optimus");
+		truckOne.setNumberOfWheels(6);
 		
-		checkProgramStatus(excel);
-		checkProgramStatus(word);
+		carOne.startEngine();
+		carOne.refuel();
 		
-		stopProgram(excel);
-		stopProgram(word);
+		truckOne.startEngine();
+		truckOne.refuel();
 		
-		checkProgramStatus(excel);
-		checkProgramStatus(word);
-		
-	}
-	
-	private static void runProgram(Program executableProgram) {
-		
-		executableProgram.run();
+		destroyVehicle(carOne);
+		destroyVehicle2(truckOne);
 		
 	}
 	
-	private static void stopProgram(Program executableProgram) {
-		
-		executableProgram.stop();
+	static void destroyVehicle(Car newCar) {
+		newCar.destroy();
 	}
 	
-	private static void checkProgramStatus(Program executableProgram) {
-		
-		if(executableProgram.getIsRunning() ) {
-			
-			System.out.println("Program " + executableProgram.getName() + " is running. ");
-			
-		} else {
-			
-			System.out.println("Program " + executableProgram.getName() + " is stopped. ");
-		}
-		
+	static void destroyVehicle2(Truck newTruck) {
+		newTruck.destroy();
 	}
-
-
 }
