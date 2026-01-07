@@ -1,69 +1,94 @@
-package ph.com.bpi.hello.M4_Act2;
+package ph.com.bpi.hello.M4_Act3;
 
 /*
  
-**SEATWORK #2: Your Turn to Try! (Branch: M4\_Activity2)**
-
-Time: 10 minutes
-
-Your Task: Create a simple ATM withdrawal system
-
+ SEATWORK #3: Your Turn to Try! (Branch: M4_Activity3)
+ Time: 10 minutes
+Your Task: ATM Balance Check with Receipt Printing
 Instructions:
+1. Create a class called ATMTransaction
+2. Create method: checkBalance(String accountNumber, double balance)
+• Inside the method:
+• Try Block:
+• Print "Processing balance inquiry..."
+• Validate account number format by converting to integer:
+Integer.parseInt(accountNumber)
+• Get account type from first character: char accountType = accountNumber.charAt(0)
+• Determine account type name:
+• If accountType == '1' → Print "Account Type: Savings"
+• If accountType == '2' → Print "Account Type: Checking"
+• Otherwise → Print "Account Type: Unknown"
+• Print "Account Number: " + accountNumber
+• Print "Current Balance: ₱" + balance
+• Print "Balance inquiry successful!"
+• Write TWO catch blocks:
+• catch (NumberFormatException e) → Print "Error: Invalid account number format!
+Account numbers must be numeric."
+• catch (StringIndexOutOfBoundsException e) → Print "Error: Account number is
+empty or invalid!"
+• Write finally block (ALWAYS executes):
+• Print "\n========== RECEIPT =========="
+• Print "Transaction Date: December 3, 2025"
+• Print "Transaction Type: Balance Inquiry"
+• Print "ATM Location: Main Branch"
+• Print "Thank you for banking with us!"
+• Print "==============================\n"
+3. In main method, test FOUR scenarios:
+• checkBalance("100123456", 15000.00) → Valid Savings account
+(success)
+• checkBalance("200987654", 25000.00) → Valid Checking account
+(success)
+• checkBalance("ABC12345", 15000.00) → NumberFormatException
+(invalid format)
+• checkBalance("", 15000.00) → StringIndexOutOfBoundsException
+(empty string)
 
-1.  Create a class called **ATMSystem**
-2.  Create an array of account balances:  
-    `double[] accounts = {10000, 15000, 20000};`
-3.  Create method: **processWithdrawal(String accountIndex, String amountInput)**  
-    Use try with TWO catch blocks
-4.  Inside try:  
-    • Parse accountIndex to int (use Integer.parseInt)  
-    • Get balance from array: accounts\[index]  
-    • Parse amountInput to double (use Double.parseDouble)  
-    • Check if amount > balance, print “Insufficient funds”  
-    • Otherwise, calculate new balance and print success
-5.  Use TWO catch blocks:  
-    • catch (NumberFormatException e) ⇒ “Invalid input”  
-    • catch (ArrayIndexOutOfBoundsException e) ⇒ “Account not found”  
-    • catch (Exception e) ⇒ “Transaction failed” (catch all for unexpected errors)
-6.  Test FOUR scenarios in main:  
-    • Account “1”, Amount “5000” ⇒ Success  
-    • Account “abc”, Amount “5000” ⇒ NumberFormatException  
-    • Account “10”, Amount “5000” ⇒ ArrayIndexOutOfBoundsException  
-    • Account “1”, Amount “20000” ⇒ Insufficient funds
-
-***
- 
- 
-**Expected Output:**
-
-    === ATM Withdrawal System ===
-
-    --- Test 1: Valid Withdrawal ---
-    Account=1, Amount=5000
-    Current balance: P15000.00
-    Withdrawal: P5000.00
-    New balance: P10000.00
-    Withdrawal successful!
-
-    --- Test 2: Invalid Account Index ---
-    Account=abc, Amount=5000
-    Error: Invalid input!
-    Please enter valid numbers.
-
-    --- Test 3: Account Not Found ---
-    Account=10, Amount=5000
-    Error: Account not found!
-    Invalid account index.
-
-    --- Test 4: Insufficient Funds ---
-    Account=1, Amount=20000
-    Current balance: P15000.00
-    Withdrawal: P20000.00
-    Insufficient funds! Cannot withdraw P20000.00
-
-    === All tests completed! ===
-
- 
+Expected Output:
+=== ATM BALANCE INQUIRY SYSTEM ===
+--- Test Case 1: Valid Savings Account ---
+Processing balance inquiry...
+Account Type: Savings
+Account Number: 100123456
+Current Balance: ₱15000.0
+Balance inquiry successful!
+========== RECEIPT ==========
+Transaction Date: December 3, 2025
+Transaction Type: Balance Inquiry
+ATM Location: Main Branch
+Thank you for banking with us!
+==============================
+--- Test Case 2: Valid Checking Account ---
+Processing balance inquiry...
+Account Type: Checking
+Account Number: 200987654
+Current Balance: ₱25000.0
+Balance inquiry successful!
+========== RECEIPT ==========
+Transaction Date: December 3, 2025
+Transaction Type: Balance Inquiry
+ATM Location: Main Branch
+Thank you for banking with us!
+==============================
+--- Test Case 3: Invalid Account Number Format ---
+Processing balance inquiry...
+Error: Invalid account number format! Account numbers must be
+numeric.
+========== RECEIPT ==========
+Transaction Date: December 3, 2025
+Transaction Type: Balance Inquiry
+ATM Location: Main Branch
+Thank you for banking with us!
+==============================
+--- Test Case 4: Empty Account Number ---
+Processing balance inquiry...
+Error: Invalid account number format! Account numbers must be
+numeric.
+========== RECEIPT ==========
+Transaction Date: December 3, 2025
+Transaction Type: Balance Inquiry
+ATM Location: Main Branch
+Thank you for banking with us!
+==============================
  
 		  */
 public class MyApplication {
@@ -71,37 +96,23 @@ public class MyApplication {
 
  
 	 
-    public static void main(String[] args) {
+	 public static void main(String[] args) {
 
-        ATMSystem atm = new ATMSystem();
+	        ATMTransaction atm = new ATMTransaction();
 
-        System.out.println("=== ATM Withdrawal System ===\n");
+	        System.out.println("=== ATM BALANCE INQUIRY SYSTEM ===");
 
-        
-        System.out.println("--- Test 1: Valid Withdrawal ---");
-        System.out.println("Account=1, Amount=5000");
-        atm.processWithdrawal("1", "5000");
-        System.out.println();
+	        System.out.println("--- Test Case 1: Valid Savings Account ---");
+	        atm.checkBalance("100123456", 15000.00);
 
-     
-        System.out.println("--- Test 2: Invalid Account Index ---");
-        System.out.println("Account=abc, Amount=5000");
-        atm.processWithdrawal("abc", "5000");
-        System.out.println();
+	        System.out.println("--- Test Case 2: Valid Checking Account ---");
+	        atm.checkBalance("200987654", 25000.00);
 
-      
-        System.out.println("--- Test 3: Account Not Found ---");
-        System.out.println("Account=10, Amount=5000");
-        atm.processWithdrawal("10", "5000");
-        System.out.println();
+	        System.out.println("--- Test Case 3: Invalid Account Number Format ---");
+	        atm.checkBalance("ABC12345", 15000.00);
 
-         
-        System.out.println("--- Test 4: Insufficient Funds ---");
-        System.out.println("Account=1, Amount=20000");
-        atm.processWithdrawal("1", "20000");
-        System.out.println();
-
-        System.out.println("=== All tests completed! ===");
-    }
+	        System.out.println("--- Test Case 4: Empty Account Number ---");
+	        atm.checkBalance("", 15000.00);
+	    }
 
 }
