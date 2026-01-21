@@ -1,0 +1,11 @@
+
+INSERT INTO users VALUES
+(1, 'Sherwin'),
+(2, 'Juan');
+
+INSERT INTO books VALUES
+(0, 'Ibong Adarna', 'Anonymous', TRUE),
+(1, 'Florante at Laura', 'Francisco Balagtas', TRUE),
+(2, 'Noli Me Tangere', 'Dr. Jose Rizal', TRUE),
+(3, 'El Filibusterismo', 'Dr. Jose Rizal', TRUE),
+(4, 'Sa Mga Kuko ng Liwanag', 'Edgardo M. Reyes', TRUE);
