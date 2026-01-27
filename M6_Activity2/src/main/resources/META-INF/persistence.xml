@@ -8,6 +8,7 @@
 	//persistence unit tells JPA how to connect to the database, which entities to manage, and which settings to use.
 	<persistence-unit name="default"
 		transaction-type="RESOURCE_LOCAL">
+		 <class>ph.com.bpi.M6.Student</class>
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<properties>
