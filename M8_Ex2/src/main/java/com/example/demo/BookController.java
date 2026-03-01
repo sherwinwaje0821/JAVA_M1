@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
@@ -7,11 +8,13 @@ import java.util.*;
 @RequestMapping("/api/books")
 public class BookController {
 
-    // Static list of 3 books
-    private List<Book> books = Arrays.asList(
+    // Static list of books (simulated database)
+    private List<Book> books = new ArrayList<>(
+        Arrays.asList(
             new Book(1, "Spring Boot Basics", "Author A"),
             new Book(2, "Java Fundamentals", "Author B"),
             new Book(3, "REST API Design", "Author C")
+        )
     );
 
     // GET /api/books
@@ -26,6 +29,14 @@ public class BookController {
         return books.stream()
                 .filter(b -> b.getId() == id)
                 .findFirst()
-                .orElse(null); // or throw exception
+                .orElse(null);
+    }
+
+    // POST /api/books
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Book createBook(@RequestBody Book book) {
+        books.add(book);    // <-- ADD to static list
+        return book;        // Return saved object
     }
 }
