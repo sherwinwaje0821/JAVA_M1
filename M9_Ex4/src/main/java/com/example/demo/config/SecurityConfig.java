@@ -21,6 +21,9 @@ public class SecurityConfig {
 
         http
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/home").hasAnyRole("USER", "MANAGER")
+                .requestMatchers("/dashboard").hasRole("USER")
+                .requestMatchers("/reports").hasRole("MANAGER")
                 .anyRequest().authenticated()
             )
             .httpBasic(Customizer.withDefaults());
@@ -28,26 +31,29 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // ✅ Password Encoder (BCrypt)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ In-memory users with ENCODED passwords
     @Bean
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder passwordEncoder) {
 
-        UserDetails user = User.withUsername("user")
+        UserDetails dev1 = User.withUsername("dev_1")
                 .password(passwordEncoder.encode("password"))
                 .roles("USER")
                 .build();
 
-        UserDetails admin = User.withUsername("admin")
+        UserDetails dev2 = User.withUsername("dev_2")
                 .password(passwordEncoder.encode("password"))
-                .roles("ADMIN")
+                .roles("USER")
                 .build();
 
-        return new InMemoryUserDetailsManager(user, admin);
+        UserDetails mgr1 = User.withUsername("mgr_1")
+                .password(passwordEncoder.encode("password"))
+                .roles("MANAGER")
+                .build();
+
+        return new InMemoryUserDetailsManager(dev1, dev2, mgr1);
     }
 }
